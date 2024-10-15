@@ -1,0 +1,20 @@
+<ul>
+    {% for item in menu.items.all %}
+        <li>
+            <a href="{{ item.url or reverse(item.named_url) }}" class="{% if current_url == (item.url or reverse(item.named_url)) %}active{% endif %}">
+                {{ item.name }}
+            </a>
+            {% if item.children.exists %}
+                <ul>
+                    {% for child in item.children.all %}
+                        <li>
+                            <a href="{{ child.url or reverse(child.named_url) }}">
+                                {{ child.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
