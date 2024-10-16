@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Menu(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
@@ -16,3 +15,12 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_named_url(self):
+        from django.urls import reverse, NoReverseMatch
+        if self.named_url:
+            try:
+                return reverse(self.named_url)
+            except NoReverseMatch:
+                return '#'
+        return self.url or '#'

@@ -1,11 +1,11 @@
 from django import template
 from menu.models import Menu, MenuItem
-from django.urls import reverse
 from django.db.models import Prefetch
 
 register = template.Library()
 
-@register.inclusion_tag('menu/menu.html', takes_context=True)
+
+@register.inclusion_tag('menu.html', takes_context=True)
 def draw_menu(context, menu_name):
     request = context['request']
     current_url = request.path
